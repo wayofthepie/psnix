@@ -1,15 +1,19 @@
 module Main where
 
 import Prelude
+import CSS.Font
+import CSS.Color as Color
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 import Data.Maybe (Maybe(..))
 import Halogen as H
 import Halogen.Aff as HA
 import Halogen.HTML as HH
+import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
+
 
 -- | The button state.
 type State = Boolean
@@ -41,7 +45,8 @@ myButton =
         label = if state then "On" else "Off"
       in
         HH.button
-          [ HP.title label
+          [ HC.style do color Color.red
+          , HP.title label
           , HE.onClick (HE.input_ Toggle)
           ]
           [ HH.text label ]
